@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            function computerPlay() {
+                let random = Math.random();
+                play = random < 0.33 ? "rock" : random < 0.66 ? "paper" : "scissors";
+                //console.log(play);
+                return play;
+            };
+
+            function playerPlay() { //sanitize player input
+                let playerPlay = prompt("Enter play").toLowerCase();
+                if (playerPlay == "rock" 
+                    || playerPlay == "paper" 
+                    || playerPlay == "scissors") {
+                    return playerPlay
+                };
+            };
+
+            function playRound(computerSelection, playerSelection) {
+                return ( !playerSelection
+                ? "You must pick rock, paper, or scissors"
+                : drawGame(computerSelection, playerSelection)
+                ? "Draw"
+                : computerWin(computerSelection, playerSelection)
+                ? `You Lose! ${computerSelection} beats ${playerSelection}`
+                : `You Win! ${playerSelection} beats ${computerSelection}`
+                );
+            };
+
+            function drawGame(computerSelection, playerSelection) {
+                return computerSelection == playerSelection ? true : false;
+            };
+
+            function computerWin(computerSelection, playerSelection) {
+                return ( computerSelection == "rock" && playerSelection == "scissors"
+                    ? true
+                    : computerSelection == "paper" && playerSelection == "rock"
+                    ? true
+                    : computerSelection == "scissors" && playerSelection == "paper"
+                    ? true
+                    : false
+                );
+            };
+
+            function game() {
+                let computerRoundWin = 0;
+                let playerRoundWin = 0;
+                let i;
+
+                for (i = 0; i < 5; i++) {
+                    roundResult = playRound(computerPlay(),playerPlay());
+                    console.log(roundResult)
+                    alert(roundResult)
+                    if (roundResult.search("must") >= 0) {
+                        i--
+                    }else if (roundResult.search("Lose") >= 0) {
+                        computerRoundWin++
+                    }else if (roundResult.search("Win") >= 0) {
+                        playerRoundWin++
+                    };
+                };
+                let gameResult = ( computerRoundWin > playerRoundWin 
+                ? "Computer Won the Game!"
+                : playerRoundWin > computerRoundWin
+                ? "You Won the Game!"
+                : "Tie Game"
+                );
+
+                console.log(gameResult);
+                alert(gameResult);      
+            };
+
+            game();
+        </script>
+    </body>
+</html>
