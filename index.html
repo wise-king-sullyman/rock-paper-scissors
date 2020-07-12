@@ -1,61 +1,23 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
         <div id="buttons">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">scissors</button>
+            <button id="Rock">Rock</button>
+            <button id="Paper">Paper</button>
+            <button id="Scissors">scissors</button>
+        </div>
+        <div id="resultDiv">
+            <p id="result">Click a Button to Start Playing</p>
+        </div>
+        <div id="scoreDiv">
+            <p id="playerScore">Player Score: 0</p>
+            <p id="computerScore">Computer Score: 0</p>
         </div>
 
-        <script>
-            function computerPlay() {
-                let random = Math.random();
-                play = random < 0.33 ? "rock" : random < 0.66 ? "paper" : "scissors";
-                return play;
-            };
-
-            function playRound(e) {
-                computerSelection = computerPlay()
-                playerSelection = e.target.id
-                console.log( drawGame(computerSelection, playerSelection)
-                ? "Draw"
-                : computerWin(computerSelection, playerSelection)
-                ? `You Lose! ${computerSelection} beats ${playerSelection}`
-                : `You Win! ${playerSelection} beats ${computerSelection}`
-                );
-            };
-
-            function drawGame(computerSelection, playerSelection) {
-                return computerSelection == playerSelection ? true : false;
-            };
-
-            function computerWin(computerSelection, playerSelection) {
-                return ( computerSelection == "rock" && playerSelection == "scissors"
-                    ? true
-                    : computerSelection == "paper" && playerSelection == "rock"
-                    ? true
-                    : computerSelection == "scissors" && playerSelection == "paper"
-                    ? true
-                    : false
-                );
-            };
-
-            function game() {
-                let computerRoundWin = 0;
-                let playerRoundWin = 0;
-                let i;
-                let gameResult = ( computerRoundWin > playerRoundWin 
-                ? "Computer Won the Game!"
-                : playerRoundWin > computerRoundWin
-                ? "You Won the Game!"
-                : "Tie Game"
-                );
-            };
-
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach((button) => {
-                button.addEventListener('click', playRound)
-            });
+        <script src="script.js">
         </script>
     </body>
 </html>
