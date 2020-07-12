@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <div id="buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">scissors</button>
+        </div>
+
         <script>
             function computerPlay() {
                 let random = Math.random();
@@ -8,8 +14,10 @@
                 return play;
             };
 
-            function playRound(computerSelection, playerSelection) {
-                return ( drawGame(computerSelection, playerSelection)
+            function playRound(e) {
+                computerSelection = computerPlay()
+                playerSelection = e.target.id
+                console.log( drawGame(computerSelection, playerSelection)
                 ? "Draw"
                 : computerWin(computerSelection, playerSelection)
                 ? `You Lose! ${computerSelection} beats ${playerSelection}`
@@ -44,9 +52,10 @@
                 );
             };
 
-            let playerPlay = prompt("Enter play").toLowerCase();
-
-            console.log(playRound(computerPlay(), playerPlay));
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button) => {
+                button.addEventListener('click', playRound)
+            });
         </script>
     </body>
 </html>
