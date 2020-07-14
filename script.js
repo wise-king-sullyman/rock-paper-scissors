@@ -26,7 +26,6 @@ function displayResult(result) {
     const div = document.querySelector('#resultDiv');
     const p = document.querySelector('#result');
     p.textContent = result;
-    div.appendChild(p);
 };
 
 function scoreKeeper() {
@@ -39,13 +38,18 @@ function scoreKeeper() {
 };
 
 function displayScore(score1, score2) {
-    const div = document.querySelector('#scoreDiv');
+    const playerScoreDiv = document.querySelector('#playerScoreColumn');
+    const computerScoreDiv = document.querySelector('#computerScoreColumn');
     const playerScore = document.querySelector('#playerScore');
     const computerScore = document.querySelector('#computerScore');
-    playerScore.textContent = `Player Score: ${score1}`;
-    computerScore.textContent = `Computer Score: ${score2}`;
-    div.appendChild(playerScore);
-    div.appendChild(computerScore);
+    if (score1 > playerScore.textContent) {
+        playerScore.textContent = score1
+        playerScoreDiv.classList.add('addPoint')
+    };
+    if (score2 > computerScore.textContent) {
+        computerScore.textContent = score2;
+        computerScoreDiv.classList.add('addPoint')
+    }
 
 };
 
@@ -58,6 +62,7 @@ function checkGameEnd() {
         return 1
     }
 };
+
 function drawGame(computerSelection, playerSelection) {
     return computerSelection == playerSelection ? true : false;
 };
@@ -73,7 +78,16 @@ function computerWin(computerSelection, playerSelection) {
     );
 };
 
+function addPoint(e) {
+    console.log(e)
+};
+
+function clearAddPoints() {
+    const divToClear = document.querySelector('.addPoint');
+    divToClear.classList.remove('addPoint')
+}
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
+    button.addEventListener('click', clearAddPoints)
     button.addEventListener('click', playRound)
 });
