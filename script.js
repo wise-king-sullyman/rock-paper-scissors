@@ -78,16 +78,24 @@ function computerWin(computerSelection, playerSelection) {
     );
 };
 
-function addPoint(e) {
-    console.log(e)
+function transitionOut(e) {
+    e.target.classList.add('transitionOut');
+
 };
 
-function clearAddPoints() {
-    const divToClear = document.querySelector('.addPoint');
-    divToClear.classList.remove('addPoint')
-}
+function clearAddClasses() {
+    const removeAddPoint = document.querySelector('.addPoint');
+    if(removeAddPoint) {
+        removeAddPoint.classList.remove('addPoint');
+        removeAddPoint.classList.remove('transitionOut')};
+};
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
-    button.addEventListener('click', clearAddPoints)
+    button.addEventListener('click', clearAddClasses)
     button.addEventListener('click', playRound)
+});
+
+const scoreDivs = document.querySelectorAll('.scoreColumn');
+scoreDivs.forEach((div) => {
+    div.addEventListener('transitionend', transitionOut)
 });
