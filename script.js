@@ -91,8 +91,8 @@ function clearAddClasses() {
 };
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
-    button.addEventListener('click', clearAddClasses)
-    button.addEventListener('click', playRound)
+    button.addEventListener('click', clearAddClasses);
+    button.addEventListener('click', playRound);
 });
 
 const scoreDivs = document.querySelectorAll('.scoreColumn');
